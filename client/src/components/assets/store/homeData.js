@@ -2,7 +2,7 @@ import back1 from './../images/back1.jpg'
 import back2 from './../images/back2.jpg'
 import back3 from './../images/back3.jpg'
 import back4 from './../images/back4.jpg'
-// import dropImg from './../images/dropimage.svg';
+import dropImg from './../images/dropdown_icon.png';
 
 const HomeData={
     crousal:[
@@ -122,10 +122,29 @@ const HomeData={
         {id:33,label:"Ashok Kumar Dr Duggal, 22C, Sector 22, Chandigarh"},
     ],
     filter_panel:[
-        {id:0,name:"Budget"},
-        {id:1,name:"Bedroom"},
-        {id:2,name:"Construction Status"},
-        {id:3,name:"Type Of"},
+        {id:0,name:"Budget",img:dropImg},
+        {id:1,name:"Bedroom",img:dropImg},
+        {id:2,name:"Construction Status",img:dropImg},
+        {id:3,name:"Type Of",img:dropImg},
+    ],
+    check_panel:[
+        {id:0,name:"1BHK"},
+        {id:1,name:"2BHK"},
+        {id:2,name:"3BHK"},
+        {id:3,name:"4BHK"},
+        {id:4,name:"5BHK"},
+    ],
+    check_panel_construction:[
+        {id:0,name:"Under Construction"},
+        {id:1,name:"Ready to move"},
+    ],
+    check_panel_typeof:[
+        {id:0,name:"Flat/Apartment"},
+        {id:1,name:"Independent/Builder Floor"},
+        {id:2,name:"Independent House/Villa"},
+        {id:3,name:"Residential Land"},
+        {id:4,name:"Farm House"},
+        {id:5,name:"Serviced Apartments"},
     ],
 }   
 
