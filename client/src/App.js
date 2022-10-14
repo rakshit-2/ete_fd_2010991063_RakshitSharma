@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import Err from './components/organism/err/index';
 import Home from './components/organism/home';
+import Signin from './components/organism/signin';
 import { useState } from 'react';
 
 
@@ -33,7 +34,8 @@ const App=(props)=>{
   
     <BrowserRouter>
       <Routes>
-      <Route path="/" element={<Home changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
+        <Route path="/signin" element={<Signin  changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
+        <Route path="/" element={<Home changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
         <Route path="/err" element={<Err/>} ></Route>
           <Route
               path="*"

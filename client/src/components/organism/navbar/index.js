@@ -55,7 +55,7 @@ const Navbar=(props)=>{
         }
         else if(x==="login")
         {
-            navigate('/login-signiup')
+            navigate('/signin')
         }
         else if(x==="profile")
         {
@@ -71,7 +71,7 @@ const Navbar=(props)=>{
         <>
         <div className='navbar__outer' id="nav">
             <div className='navbar__inner'>
-                <div className='navbar__inner__left'>
+                <div className='navbar__inner__left' onClick={()=>{navigate('/')}}>
                     <div className='navbar__inner__left__logo'>
                         <img src={logo} style={{width:"100%",height:"100%",borderRadius:"50%"}}/>
                     </div>

@@ -17,7 +17,7 @@ import FeaturedCollection from '../../molecule/FeaturedCollection';
 import ProjectDemand from './../../molecule/ProjectDemand';
 import News from './../../molecule/news';
 import ExpertDisplay from '../../molecule/ExpertDisplay';
-
+import ads1 from './../../assets/images/ads1.png'
 
 
 
@@ -386,9 +386,10 @@ return (
 
             <FeaturedCollection/>
             <RecommProp/>
+            <ExpertDisplay/>
             <ProjectDemand/>
             <News/>
-            <ExpertDisplay/>
+            
         </div>
     </div>
     

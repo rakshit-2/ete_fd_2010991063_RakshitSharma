@@ -22,6 +22,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 }
 .navbar__inner__left__logo{
     width:60px;
