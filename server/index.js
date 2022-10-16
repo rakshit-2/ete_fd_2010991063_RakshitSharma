@@ -37,19 +37,63 @@ app.post("/signup/insert-data",(req,res)=>{
     var lname=req.body.lname;
     var email=req.body.email;
     var pass=req.body.pass;
-    const postAll="insert into buyer_profile(fname,lname,email,pass) values(?,?,?,?);"
-    db.query(postAll,[fname,lname,email,pass],(err,result)=>{
+    var check=req.body.check;
+    var postAll="";
+    if(check==="buyer"){
+        var postAll="insert into profile(fname,lname,email,pass,buyer) values(?,?,?,?,?);"
+        
+    }
+    else
+    {
+        var postAll="insert into profile(fname,lname,email,pass,dealer) values(?,?,?,?,?);"
+    }
+    db.query(postAll,[fname,lname,email,pass,1],(err,result)=>{
+        res.send(result);
+    }) 
+})
+
+
+app.get("/login/check-data",(req,res)=>{
+    var email=req.query.email;
+    var pass=req.query.pass;
+    var check=req.query.check;
+    var postAll="";
+    if(check==="buyer")
+    {
+        var postAll="select * from profile where email=? and pass=? and buyer=?;"
+    }
+    else
+    {
+        var postAll="select * from profile where email=? and pass=? and dealer=?;"
+    }
+    db.query(postAll,[email,pass,1],(err,result)=>{
         res.send(result);
     })
 })
 
 
 
+app.get("/profile/get-data",(req,res)=>{
+    var email=req.query.email;
+    var postAll="select * from profile where email=?;"
+    db.query(postAll,[email],(err,result)=>{
+        res.send(result);
+    })
+})
 
 
-
-
-
+app.post("/profile/insert-data",(req,res)=>{
+    var email=req.body.email;
+    var income=req.body.income;
+    var address=req.body.address;
+    var contact=req.body.contact;
+    var occ=req.body.occ;
+    console.log(email)
+    var postAll="UPDATE profile SET income = ?, address = ?, contact=?, occupation=?, updated=? WHERE email=?;"
+    db.query(postAll,[income,address,contact,occ,1,email],(err,result)=>{
+        res.send(result);
+    })
+})
 
 
 

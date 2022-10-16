@@ -1,5 +1,11 @@
 import './index.css';
-import React from 'react';
+import * as React from 'react';
+import { red } from '@mui/material/colors';
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
+import FormLabel from '@mui/material/FormLabel';
 import { useState } from 'react';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -12,12 +18,19 @@ const Signin = (props) =>
     const navigate = useNavigate();
 
     const[displayLogin,setDisplayLogin]=useState({
-                                                    login:"flex",
-                                                    signup:"none"
+                                                login:"flex",
+                                                signup:"none"
     });
 
     const [firstName,setFirstName]=useState('')
     const [lastName,setLastName]=useState('')
+
+    const [loginPass,setLoginPass]=useState('');
+    const [loginEmail,setLoginEmail]=useState('');
+    const [setTypeOfAccount, setSetTypeOfAccount] = React.useState({
+                                                                buyer:0,
+                                                                dealer:0,
+    });
     const [email,setEmail]=useState('')
     const [emailBorder,setEmailBorder]=useState('none')
     const [pass,setPass]=useState('')
@@ -37,27 +50,103 @@ const Signin = (props) =>
     const [upa,setUpa]=useState('block')
 
 
+
     function submitClicked()
     {
-        console.log(flagEmail,flagPass,flagFName,flagLName)
-        if(flagEmail===1 && flagPass===1 && flagFName===1 && flagLName===1)
+        console.log(setTypeOfAccount.buyer,setTypeOfAccount.dealer)
+        if(flagEmail===1 && flagPass===1 && flagFName===1 && flagLName===1 && (setTypeOfAccount.buyer===1 || setTypeOfAccount.dealer===1))
         {
-            Axios.post('http://localhost:3001/signup/insert-data',
+            if(setTypeOfAccount.buyer===1)
             {
-                fname:firstName,
-                lname:lastName,
-                email:email,
-                pass:pass
-            }).then((res)=>{
-                console.log("success ",res)
-                navigate('/');
-            });
+                Axios.post('http://localhost:3001/signup/insert-data',
+                {
+                    fname:firstName,
+                    lname:lastName,
+                    email:email,
+                    pass:pass,
+                    check:"buyer"
+                }).then((res)=>{
+                    props.changeLogin(true,"buyer",email);
+                    navigate('/');
+                });
+            }
+            else
+            {
+                Axios.post('http://localhost:3001/signup/insert-data',
+                {
+                    fname:firstName,
+                    lname:lastName,
+                    email:email,
+                    pass:pass,
+                    check:"dealer"
+                }).then((res)=>{
+                    props.changeLogin(true,"dealer",email);
+                    navigate('/');
+                });
+            }
         }
         else
         {
             console.log('fail');
         }
-        
+    }
+
+
+
+    function LoginClicked()
+    {
+        if(loginEmail!=="" && loginPass!=="" && (setTypeOfAccount.buyer===1 || setTypeOfAccount.dealer===1))
+        {
+            if(setTypeOfAccount.buyer===1)
+            {
+                Axios.get('http://localhost:3001/login/check-data',
+                {
+                    params:{
+                        email:loginEmail,
+                        pass:loginPass,
+                        check:"buyer",
+                    }
+                }).then((res)=>{
+                    console.log("success ",res)
+                    if(res.data.length!==0)
+                    {
+                        props.changeLogin(true,"buyer",loginEmail);
+                        navigate('/');
+                    }
+                    else
+                    {
+                        console.log("login failed");
+                    }
+                    
+                });
+            }
+           else{
+            Axios.get('http://localhost:3001/login/check-data',
+            {
+                params:{
+                    email:loginEmail,
+                    pass:loginPass,
+                    check:"dealer",
+                }
+            }).then((res)=>{
+                console.log("success ",res)
+                if(res.data.length!==0)
+                {
+                    props.changeLogin(true,"dealer",loginEmail);
+                    navigate('/');
+                }
+                else
+                {
+                    console.log("login failed");
+                }
+                
+            });
+           }
+        }
+        else
+        {
+            console.log('fail');
+        }
     }
 
     function emailcheck(e)
@@ -137,7 +226,27 @@ const Signin = (props) =>
                         <div className="signin-login">
                             Already A Member?{'\u00A0'}<span style={{color:"#EF4B4D",cursor:"pointer"}}  onClick={()=>{setDisplayLogin({login:'flex',signup:'none'})}}>Login</span>
                         </div>
-
+                        <div className="signin-name">
+                        <RadioGroup
+                            row
+                            aria-labelledby="demo-row-radio-buttons-group-label"
+                            name="row-radio-buttons-group"
+                        >
+                            <FormControlLabel value="female" onChange={(e)=>{setSetTypeOfAccount({buyer:1,dealer:0})}} control={<Radio  sx={{
+                                color: red[800],
+                                
+                                '&.Mui-checked': {
+                                    color: red[600],
+                                },
+                                }} />} label="Buyer" />
+                            <FormControlLabel value="male"  onChange={(e)=>{setSetTypeOfAccount({buyer:0,dealer:1})}} control={<Radio   sx={{
+                                color: red[800],
+                                '&.Mui-checked': {
+                                    color: red[600],
+                                },
+                                }} />} label="Dealer" />
+                        </RadioGroup>
+                        </div>
                         <div className="signin-name">
                             <div className="name-outer">
                                 <div className="name-label">
@@ -162,6 +271,8 @@ const Signin = (props) =>
                             </div>
                         </div>
 
+                        
+                        
                         <div className="signin-name">
                             <div className="email-outer">
                                 <div className="email-label">
@@ -224,14 +335,34 @@ const Signin = (props) =>
                             Create A New Account!{'\u00A0'}<span style={{color:"#EF4B4D",cursor:"pointer"}} onClick={()=>{setDisplayLogin({login:'none',signup:'flex'})}}>Sign Up</span>
                         </div>
 
-                        
+                        <div className="signin-name">
+                        <RadioGroup
+                            row
+                            aria-labelledby="demo-row-radio-buttons-group-label"
+                            name="row-radio-buttons-group"
+                        >
+                            <FormControlLabel value="female" onChange={(e)=>{setSetTypeOfAccount({buyer:1,dealer:0})}} control={<Radio  sx={{
+                                color: red[800],
+                                
+                                '&.Mui-checked': {
+                                    color: red[600],
+                                },
+                                }} />} label="Buyer" />
+                            <FormControlLabel value="male"  onChange={(e)=>{setSetTypeOfAccount({buyer:0,dealer:1})}} control={<Radio   sx={{
+                                color: red[800],
+                                '&.Mui-checked': {
+                                    color: red[600],
+                                },
+                                }} />} label="Dealer" />
+                        </RadioGroup>
+                        </div>
 
                         <div className="signin-name">
                             <div className="email-outer">
                                 <div className="email-label">
                                     Email Address{'\u00A0'}<i style={{color:"#EF4B4D",width:"10px",height:"10px"}}  class="far fa-envelope-open"></i>
                                 </div>
-                                <input type="email" style={{border:emailBorder}} onChange={(e)=>{emailcheck(e.target.value)}} placeholder="abc@example.com" className="email-field"  required='required'/>
+                                <input type="email" style={{border:emailBorder}} onChange={(e)=>{setLoginEmail(e.target.value)}} placeholder="abc@example.com" className="email-field"  required='required'/>
                             </div>
                         </div>
 
@@ -241,7 +372,7 @@ const Signin = (props) =>
                                     Password{'\u00A0'}<i style={{color:"#EF4B4D",width:"10px",height:"10px"}} class="fad fa-unlock-alt"></i>
                                 </div>
                                 <div className="pass-icon-field">
-                                    <input type={showPass} style={{border:passBorder}} onChange={(e)=>{passcheck(e.target.value)}} placeholder="Abc$123" className="pass-field"  required='required'/>
+                                    <input type={showPass} style={{border:passBorder}} onChange={(e)=>{setLoginPass(e.target.value)}} placeholder="Abc$123" className="pass-field"  required='required'/>
                                     <div className="eyebutton" onClick={()=>{showPassButton()}}>
                                         {eyeDisplay}
                                     </div>
@@ -250,7 +381,7 @@ const Signin = (props) =>
                         </div>
 
                         <div className="signin-button-outer">
-                            <div className="signin-button" onClick={()=>{submitClicked()}}>
+                            <div className="signin-button" onClick={()=>{LoginClicked()}}>
                                 Login
                             </div>
                         </div>
