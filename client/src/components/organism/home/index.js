@@ -5,7 +5,8 @@ import Navbar from '../navbar';
 import HomeData from './../../assets/store/homeData';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
-import { useState } from 'react';
+import Axios from 'axios';
+import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Slider from '@mui/material/Slider';
 import Checkbox from '@mui/material/Checkbox';
@@ -27,78 +28,57 @@ import ads1 from './../../assets/images/ads1.png'
 
 const Home=(props)=>{
     const navigate = useNavigate();
-    const[val,setVal]=useState("");
-    const[valField,setValField]=useState("");
+    
     const[filterDisplay,setFilterDisplay]=useState({
                                             budget:"none",
                                             bedroom:"none",
                                             construction:"none",
                                             type:"none",
     });
-    const [valueBudget, setValueBudget] = React.useState([0, 100]);
-
-    const [checkedAll, setCheckedAll] = React.useState([false]);
-    const [checked1bhk, setChecked1bhk] = React.useState([false]);
-    const [checked2bhk, setChecked2bhk] = React.useState([false]);
-    const [checked3bhk, setChecked3bhk] = React.useState([false]);
-    const [checked4bhk, setChecked4bhk] = React.useState([false]);
-    const [checked5bhk, setChecked5bhk] = React.useState([false]);
-
-
-    const [constructionCheckAll, setConstructionCheckAll] = React.useState([false]);
-    const [constructionCheckUnder, setConstructionCheckUnder] = React.useState([false]);
-    const [constructionCheckReady, setConstructionCheckReady] = React.useState([false]);
-
-    const [checkedTypeofAll, setCheckedTypeofAll] = React.useState([false]);
-    const [checkedTypeofFlat, setCheckedTypeofFlat] = React.useState([false]);
-    const [checkedTypeofIndependentFloor, setCheckedTypeofIndependentFloor] = React.useState([false]);
-    const [checkedTypeofIndependentHouse, setCheckedTypeofIndependentHouse] = React.useState([false]);
-    const [checkedTypeofResidentialLand, setCheckedTypeofResidentialLand] = React.useState([false]);
-    const [checkedTypeofFarm, setCheckedTypeofFarm] = React.useState([false]);
-    const [checkedTypeofServisedApart, setCheckedTypeofServisedApart] = React.useState([false]);
+    
     
 
-
+    
 
 
 
 
   
 try{
-    console.log(val);
+    console.log(props.val);
 }
 catch(err)
 {
-    setVal("Location");
+    props.changeSetVal("Location");
 }
 try{
-    console.log(valField);
+    console.log(props.valField);
 }
 catch(err)
 {
-    setValField("Landmark,Locality");
+    props.changeSetValField("Landmark,Locality");
 }
     
 function placebar()
 {
     var li;
-    if(val==="Chandigarh")
+    if(props.val==="Chandigarh")
     {
         li=HomeData.Chandigarh;
     }
-    else if(val==="Panchkula")
+    else if(props.val==="Panchkula")
     {
         li=HomeData.Panchkula;
     }
-    else if(val==="Zirakpur")
+    else if(props.val==="Zirakpur")
     {
         li=HomeData.Zirakpur;
     }
-    else if(val==="Ambala")
+    else if(props.val==="Ambala")
     {
         li=HomeData.Ambala;
     }
-    else if(val=="Mohali"){
+    else if(props.val=="Mohali"){
         li=HomeData.Mohali;
     }
     else{
@@ -110,8 +90,8 @@ function placebar()
         defaultValue={null}
         id="combo-box-demo"
         options={li}
-        value={valField}
-        onChange={(event: any, newVal:string | null)=>setValField(newVal.label)}
+        value={props.valField}
+        onChange={(event: any, newVal:string | null)=>props.changeSetValField(newVal.label)}
         renderInput={(params) => <TextField {...params} label="Locality, Sector" />}
         />
     )
@@ -125,12 +105,12 @@ function valuetext(value) {
 
 function searchClicked()
 {
-    if(val==="" || valField==="")
+    if(props.val==="" || props.valField==="")
     {
         console.log("error");
     }
     else{
-        navigate('/search-property')
+        navigate('/search')
     }
 }
 
@@ -174,87 +154,6 @@ function filterEachClicked(x)
 
 
 
-function handleChangeCheckbox(x,check)
-{
-    switch(x) {
-        case 0:
-            setCheckedAll([check]);
-          break;
-        case 1:
-            setChecked1bhk([check]);
-          break;
-        case 2:
-            setChecked2bhk([check]);
-            break;
-        case 3:
-            setChecked3bhk([check]);
-            break
-        case 4:
-            setChecked4bhk([check]);
-            break;
-        case 5:
-            setChecked5bhk([check]);
-            break;
-        default:
-          console.log("fuck u")
-      }
-}
-
-
-
-function handleChangeCheckboxConstruction(x,check)
-{
-    switch(x) {
-        case 0:
-            setConstructionCheckAll([check]);
-          break;
-        case 1:
-            setConstructionCheckUnder([check]);
-          break;
-        case 2:
-            setConstructionCheckReady([check]);
-            break;
-        default:
-          console.log("fuck u")
-      }
-}
-
-
-
-function handleChangeCheckboxTypeof(x,check)
-{
-    switch(x) {
-        case 0:
-            setCheckedTypeofAll([check]);
-          break;
-        case 1:
-            setCheckedTypeofFlat([check]);
-          break;
-        case 2:
-            setCheckedTypeofIndependentFloor([check]);
-            break;
-        case 3:
-            setCheckedTypeofIndependentHouse([check]);
-        break;
-        case 4:
-            setCheckedTypeofResidentialLand([check]);
-        break;
-        case 5:
-            setCheckedTypeofFarm([check]);
-            break;
-        case 6:
-            setCheckedTypeofServisedApart([check]);
-            break;
-        default:
-          console.log("fuck u")
-      }
-}
-
-
-const handleChangeSlider = (event, newValue) => {
-    setValueBudget(newValue);
-  };
-
 return (
     <>
     <div className='home__outer'>
@@ -284,8 +183,8 @@ return (
                             defaultValue={null}
                             id="combo-box-demo"
                             options={HomeData.select_field}
-                            value={val}
-                            onChange={(event: any, newVal:string | null)=>setVal(newVal.label)}
+                            value={props.val}
+                            onChange={(event: any, newVal:string | null)=>props.changeSetVal(newVal.label)}
                             renderInput={(params) => <TextField {...params} label="Place" />}
                             />
                         </div>
@@ -311,13 +210,15 @@ return (
                             Select Price Range
                         </div>  
                         <div className='home__inner__seaction2__inner__bottom__under__all__value'>
-                            {valueBudget[0]}{'\u00A0'}Lacs {'\u00A0'} - {'\u00A0'} {valueBudget[1]}{'\u00A0'}Lacs
+                            {props.valueBudget[0]}{'\u00A0'}Cr {'\u00A0'} - {'\u00A0'} {props.valueBudget[1]}{'\u00A0'}Cr
                         </div> 
                         <Slider
-                        value={valueBudget}
-                        onChange={handleChangeSlider}
+                        value={props.valueBudget}
+                        onChange={props.handleChangeSlider}
                         valueLabelDisplay="auto"
                         getAriaValueText={valuetext}
+                        min={1}
+                                max={100}
                         />
                     </div>
                     <div className='home__inner__seaction2__inner__bottom__under__all2' style={{display:filterDisplay.bedroom}}>
@@ -331,8 +232,9 @@ return (
                                     <FormControlLabel
                                         key={id}
                                         value={name}
+                                        checked={props.checkArr[id]}
                                         control={<Checkbox />}
-                                        onChange={(e)=>{handleChangeCheckbox(id,e.target.checked)}}
+                                        onChange={(e)=>{props.handleChangeCheckbox(id,e.target.checked)}}
                                         label={name}
                                         labelPlacement="end"
                                      />
@@ -351,11 +253,12 @@ return (
                                     <FormControlLabel
                                         key={id}
                                         value={name}
+                                        checked={props.constructionArr[id]}
                                         control={<Checkbox />}
-                                        onChange={(e)=>{handleChangeCheckboxConstruction(id,e.target.checked)}}
+                                        onChange={(e)=>{props.handleChangeCheckboxConstruction(id,e.target.checked)}}
                                         label={name}
                                         labelPlacement="end"
-                                     />
+                                    />
                                 )
                             })}   
                         </FormGroup>
@@ -371,8 +274,9 @@ return (
                                     <FormControlLabel
                                         key={id}
                                         value={name}
+                                        checked={props.typeofArr[id]}
                                         control={<Checkbox />}
-                                        onChange={(e)=>{handleChangeCheckboxTypeof(id,e.target.checked)}}
+                                        onChange={(e)=>{props.handleChangeCheckboxTypeof(id,e.target.checked)}}
                                         label={name}
                                         labelPlacement="end"
                                      />

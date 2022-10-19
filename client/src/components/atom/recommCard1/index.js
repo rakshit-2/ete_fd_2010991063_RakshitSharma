@@ -36,20 +36,19 @@ const RecommCard1=(props)=>{
             
             <div className='recomm__card1'>
                 <div className='recomm__card1__img'>
-                    <img src={test} className="recomm__card1__img__inner"/>
+                    <img src={require("./../../assets/images/"+props.image)} className="recomm__card1__img__inner"/>
                 </div>
                 <div className='recomm__card1__head'>
-                    2 BHK Apartment, 2 Baths
+                    {props.title}
                 </div>
                 <div className='recomm__card1__desc'>
-                    In Ambika Florence Park, Mullanpur
-                    Posted by Dealer
+                    {props.description}
                 </div>
                 <div className='recomm__card1__date'>
-                    1 month ago
+                    {props.bhk} BHK rooms
                 </div>
                 <div className='recomm__card1__price'>
-                    Rs: 12 Lacs only/-
+                   {props.price} only/-
                 </div>
             </div>
             </>

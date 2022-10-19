@@ -68,7 +68,7 @@ const Navbar=(props)=>{
         {
             if(props.login!==1)
             {
-                console.log("login first")
+                navigate("/signin")
             }
             else
             {

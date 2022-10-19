@@ -16,7 +16,6 @@ const HomeData={
         {id:1,name:"RENT"},
         {id:2,name:"COMMERCIAL"},
         {id:3,name:"PG/CO-LIVING"},
-        {id:4,name:"POST PROPERTY"},
     ],
     select_field:[
         {

@@ -41,7 +41,6 @@ app.post("/signup/insert-data",(req,res)=>{
     var postAll="";
     if(check==="buyer"){
         var postAll="insert into profile(fname,lname,email,pass,buyer) values(?,?,?,?,?);"
-        
     }
     else
     {
@@ -95,6 +94,23 @@ app.post("/profile/insert-data",(req,res)=>{
     })
 })
 
+
+
+
+
+app.get("/search/get-data",(req,res)=>{
+    var postAll="select * from property;"
+    db.query(postAll,(err,result)=>{
+        res.send(result);
+    })
+})
+
+app.get("/home/recommended/get-data",(req,res)=>{
+    var postAll="select * from property where recommended=1;"
+    db.query(postAll,(err,result)=>{
+        res.send(result);
+    })
+})
 
 
 const port=process.env.PORT || 3001;

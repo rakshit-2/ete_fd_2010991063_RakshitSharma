@@ -5,3 +5,23 @@ body{
     font-family: 'Oswald', sans-serif;
 }
 
+/* ################################################################################### */
+/* scroll bar */
+/* ################################################################################### */
+
+
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: rgb(255, 255, 255)
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #888; 
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+  }

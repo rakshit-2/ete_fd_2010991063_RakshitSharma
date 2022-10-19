@@ -1,4 +1,4 @@
-
+import * as React from 'react';
 import './App.css';
 import {
   BrowserRouter,
@@ -10,12 +10,12 @@ import Err from './components/organism/err/index';
 import Home from './components/organism/home';
 import Signin from './components/organism/signin';
 import Profile from './components/organism/profile';
+import Search from './components/organism/search';
+import Axios from 'axios';
 
 
 
-
-
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 
 
 const App=(props)=>{
@@ -27,6 +27,52 @@ const App=(props)=>{
   })
   const[showErrorLogin,setShowErrorLogin]=useState(0);
   const[loginEmail,setLoginEmail]=useState("")
+
+
+
+
+
+
+  const [valueBudget, setValueBudget] = React.useState([1, 100]);
+
+  const [checkedAll, setCheckedAll] = React.useState(false);
+  const [checked1bhk, setChecked1bhk] = React.useState(false);
+  const [checked2bhk, setChecked2bhk] = React.useState(false);
+  const [checked3bhk, setChecked3bhk] = React.useState(false);
+  const [checked4bhk, setChecked4bhk] = React.useState(false);
+  const [checked5bhk, setChecked5bhk] = React.useState(false);
+
+  const [constructionCheckAll, setConstructionCheckAll] = React.useState(false);
+  const [constructionCheckUnder, setConstructionCheckUnder] = React.useState(false);
+  const [constructionCheckReady, setConstructionCheckReady] = React.useState(false);
+
+  const [checkedTypeofAll, setCheckedTypeofAll] = React.useState(false);
+  const [checkedTypeofFlat, setCheckedTypeofFlat] = React.useState(false);
+  const [checkedTypeofIndependentFloor, setCheckedTypeofIndependentFloor] = React.useState(false);
+  const [checkedTypeofIndependentHouse, setCheckedTypeofIndependentHouse] = React.useState(false);
+  const [checkedTypeofResidentialLand, setCheckedTypeofResidentialLand] = React.useState(false);
+  const [checkedTypeofFarm, setCheckedTypeofFarm] = React.useState(false);
+  const [checkedTypeofServisedApart, setCheckedTypeofServisedApart] = React.useState(false);
+  
+  const[val,setVal]=useState("");
+  const[valField,setValField]=useState("");
+
+
+
+  function changeSetVal(x)
+  {
+    setVal(x)
+  }
+  function changeSetValField(x)
+  {
+    setValField(x)
+  }
+  
+
+  
+
+
+
 
   function changeLogin(x,check,email)
   {
@@ -51,13 +97,147 @@ const App=(props)=>{
 
 
 
+
+
+
+
+
+
+  function handleChangeCheckbox(x,check)
+  {
+      switch(x) {
+          case 0:
+              setChecked1bhk(check);
+            break;
+          case 1:
+              setChecked2bhk(check);
+              break;
+          case 2:
+              setChecked3bhk(check);
+              break
+          case 3:
+              setChecked4bhk(check);
+              break;
+          case 4:
+              setChecked5bhk(check);
+              break;
+          default:
+            console.log("fuck u")
+        }
+  }
+  
+  
+  
+  function handleChangeCheckboxConstruction(x,check)
+  {
+      switch(x) {
+          case 0:
+              setConstructionCheckAll(check);
+            break;
+          case 1:
+              setConstructionCheckUnder(check);
+            break;
+          case 2:
+              setConstructionCheckReady(check);
+              break;
+          default:
+            console.log("fuck u")
+        }
+  }
+  
+  
+  
+  function handleChangeCheckboxTypeof(x,check)
+  {
+      switch(x) {
+          case 0:
+              setCheckedTypeofAll(check);
+            break;
+          case 1:
+              setCheckedTypeofFlat(check);
+            break;
+          case 2:
+              setCheckedTypeofIndependentFloor(check);
+              break;
+          case 3:
+              setCheckedTypeofIndependentHouse(check);
+          break;
+          case 4:
+              setCheckedTypeofResidentialLand(check);
+          break;
+          case 5:
+              setCheckedTypeofFarm(check);
+              break;
+          case 6:
+              setCheckedTypeofServisedApart(check);
+              break;
+          default:
+            console.log("fuck u")
+        }
+  }
+  
+  
+  const handleChangeSlider = (event, newValue) => {
+      setValueBudget(newValue);
+    };
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
   return (
   
     <BrowserRouter>
       <Routes>
         <Route path="/signin" element={<Signin  changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
         <Route path="/profile" element={<Profile loginEmail={loginEmail} changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
-        <Route path="/" element={<Home changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
+        <Route path="/search" element={
+        <Search 
+          changeLogin={changeLogin} 
+          login={login} 
+          showErrorLogin={showErrorLogin}
+          valueBudget={valueBudget}
+          handleChangeSlider={handleChangeSlider}
+          handleChangeCheckboxTypeof={handleChangeCheckboxTypeof}
+          handleChangeCheckboxConstruction={handleChangeCheckboxConstruction}
+          handleChangeCheckbox={handleChangeCheckbox}
+          val={val}
+          valField={valField}
+          checkArr={[checked1bhk,checked2bhk,checked3bhk,checked4bhk,checked5bhk]}
+          constructionArr={[constructionCheckAll,constructionCheckUnder,constructionCheckReady]}
+          typeofArr={[checkedTypeofAll,checkedTypeofFlat,checkedTypeofIndependentFloor,checkedTypeofIndependentHouse,checkedTypeofResidentialLand
+          ,checkedTypeofFarm,checkedTypeofServisedApart]}
+        />} ></Route>
+        <Route path="/" element={
+        <Home 
+          changeLogin={changeLogin} 
+          login={login} 
+          showErrorLogin={showErrorLogin}
+          valueBudget={valueBudget}
+          handleChangeSlider={handleChangeSlider}
+          handleChangeCheckboxTypeof={handleChangeCheckboxTypeof}
+          handleChangeCheckboxConstruction={handleChangeCheckboxConstruction}
+          handleChangeCheckbox={handleChangeCheckbox}
+          changeSetVal={changeSetVal}
+          changeSetValField={changeSetValField}
+          val={val}
+          valField={valField}
+          checkArr={[checked1bhk,checked2bhk,checked3bhk,checked4bhk,checked5bhk]}
+          constructionArr={[constructionCheckAll,constructionCheckUnder,constructionCheckReady]}
+          typeofArr={[checkedTypeofAll,checkedTypeofFlat,checkedTypeofIndependentFloor,checkedTypeofIndependentHouse,checkedTypeofResidentialLand
+                      ,checkedTypeofFarm,checkedTypeofServisedApart]}
+        />} ></Route>
         <Route path="/err" element={<Err/>} ></Route>
           <Route
               path="*"
