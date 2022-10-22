@@ -6,19 +6,18 @@ return (
     <>
     <div className='expertCard__outer'>
         <div className='expertCard__inner__img'>
-            <img src={test} className="expertCard__inner__img__inner"/> 
+            <img src={require('./../../assets/images/'+props.image)} className="expertCard__inner__img__inner"/> 
         </div>
         <div className='expertCard__inner__name'>
-            Nitin Verma
+            {props.name}
         </div>
         <div className='expertCard__inner__desc'>
-            Stamp duty in key tier-2 cities in India In this article, 
-            listed are stamp duty and registration charges on 
+            {props.description}
         </div>
         <div className='expertCard__inner__exp'>
             <div className='expertCard__inner__exp__left'>
                 <div className='expertCard__inner__exp__left__top'>
-                    12 years
+                    {props.exp_year}
                 </div>
                 <div className='expertCard__inner__exp__left__top' style={{color:"grey"}}>
                     Experience
@@ -27,7 +26,7 @@ return (
             <div style={{width:"1px",height:"2rem",backgroundColor:"grey"}}></div>
             <div className='expertCard__inner__exp__left'>
                 <div className='expertCard__inner__exp__left__top'>
-                    108
+                    {props.sold_prop}
                 </div>
                 <div className='expertCard__inner__exp__left__top' style={{color:"grey"}}>
                     Properties

@@ -3,12 +3,31 @@ import RecommCard1 from './../../atom/recommCard1';
 import HomeData from '../../assets/store/homeData';
 import Carousel from "react-multi-carousel";
 import "./../../../../node_modules/react-multi-carousel/lib/styles.css";
-
+import Axios from 'axios';
+import { useState,useEffect } from 'react';
+import LoadingScreen from '../../atom/loadingScreen';
 
 
 
 
 const ProjectDemand=(props)=>{
+
+    const[proLoading,setProLoading]=useState(true);
+    const[proDisplay,setProDisplay]=useState([])
+  
+  
+  
+    useEffect(() => {
+      Axios.get('http://localhost:3001/home/project/get-data',
+      {
+          name:"check",
+      }).then((res)=>{
+        setProDisplay(res.data);
+        setProLoading(false)
+      });
+    }, []);
+
+
     const responsive = {
         desktop: {
           breakpoint: { max: 3000, min: 1181 },
@@ -37,23 +56,30 @@ return (
                 The most searched projects
             </div>
             <div className='recomm__inner__display'>
+            {
+                proLoading ? (
+                    <div className='loading__outer' style={{width:"100%",height:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                        <LoadingScreen/>    
+                    </div>
+                    
+                ):(
                 <Carousel 
                     responsive={responsive} 
                     draggable
-                    autoPlay
-                    autoPlaySpeed={3000}
                     pauseOnHover
                     infinite
                     showDots={true}
                     removeArrowOnDeviceType={["tablet", "mobile","desktop"]}>
-                    {HomeData.check_panel_typeof.map((ele)=>{
-                        const{id,name}=ele;
+                    {proDisplay.map((ele)=>{
+                        const{id,image,title,description,price,area,bhk,type_of,
+                            construction_status,furnished_status,verefied,global_type,purchase_status}=ele;
                         return(
-                            <RecommCard1 flag={1}/>
+                            <RecommCard1 flag={1}  id={id} image={image} title={title} description={description} price={price} bhk={bhk}/>
                         )
                     })}  
                 </Carousel>
-                
+                )
+            }
             </div>
         </div>
     </div>

@@ -20,6 +20,7 @@ const Search=(props)=>{
     const[loading,setLoading]=useState(true)
 
     useEffect(() => {
+        // window.screenTop(0)
         Axios.get('http://localhost:3001/search/get-data',
         {
             name:"check",
@@ -76,12 +77,164 @@ const Search=(props)=>{
 
     function changeFilter()
     {
+        var li=all;
+        for(var i=0;i<li.length;i++)
+        {
+            var price_int=parseInt(li[i].price.slice(0,4));
+            if(price_int>=props.valueBudget[0] && price_int<=props.valueBudget[1])
+            {
+                continue;
+            }
+            else
+            {
+                li[i]=-1
+            }
+        }
+        for(var i=0;i<li.length;i++)
+        {
+            if(props.checkArr[0]===true && li[i].bhk===1)
+            {
+                continue;
+            }
+            else{
+                li[i]=-1
+            }
+        }
+        console.log(li)
+        // for(var i=0;i<li1.length;i++)
+        // {
+        //     if(props.constructionArr[1]===true && props.constructionArr[2]===true)
+        //     {
+        //         li2.push(li1[i]);
+        //     }
+        //     else if(props.constructionArr[1]===true && li1[i].construction_status==="Under Construction")
+        //     {
+        //         li2.push(li1[i])
+        //     }
+        //     if(props.constructionArr[2]===true && li1[i].construction_status==="Ready to move")
+        //     {
+        //         li2.push(li1[i])
+        //     }
+        // }
+        console.log(li)
 
+
+
+
+        // var li=all;
+        // for(var i=0;i<10;i++)
+        // {
+        //     var flag=0;
+        //     //budget
+        //     console.log("inside filter functio")
+        //     var price_int=parseInt(li[i].price.slice(0,4));
+        //     if(price_int>=props.valueBudget[0] && price_int<=props.valueBudget[1])
+        //     {
+        //         flag=1;
+        //     }
+        //     else
+        //     {
+        //         continue;
+        //     }
+
+        //     if(flag===1)
+        //     {
+        //         //bhk
+        //         console.log(props.checkArr)
+        //         if(props.checkArr[0]===true)
+        //         {
+        //             if(li[i].bhk===1)
+        //             {
+        //                 flag=2
+        //             }
+        //         }
+        //         if(props.checkArr[1]===true)
+        //         {
+        //             if(li[i].bhk===2)
+        //             {
+        //                 flag=2
+        //             }
+        //         }
+        //         if(props.checkArr[2]===true)
+        //         {
+        //             if(li[i].bhk===3)
+        //             {
+        //                 flag=2
+        //             }
+        //         }
+        //         if(props.checkArr[3]===true)
+        //         {
+        //             if(li[i].bhk===4)
+        //             {
+        //                 flag=2
+        //             }
+        //         }
+        //         if(props.checkArr[4]===true)
+        //         {
+        //             if(li[i].bhk===5)
+        //             {
+        //                 flag=2
+        //             }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         continue;
+        //     }
+            
+            
+        //     if(flag===2)
+        //     {
+        //         if(props.constructionArr[1]===true)
+        //         {
+        //             if(all[i].construction_status==="Under Construction")
+        //             {
+        //                 flag=3
+        //             }
+        //         }
+        //         if(props.constructionArr[2]===true)
+        //         {
+        //             if(all[i].construction_status==="Ready to move")
+        //             {
+        //                 flag=3
+        //             }
+        //         }
+        //     }
+        //     else
+        //     {
+        //         continue;
+        //     }
+
+            
+
+
+
+        //     // checking area for filter
+        //     var area_int=parseInt(all[i].area);
+        //     if(area_int>=valueArea[0] && area_int<=valueArea[1])
+        //     {
+        //         li.add(all[i])
+        //     }
+        //     else
+        //     {
+        //         continue;
+        //     }
+
+        //     // checking verefied
+
+
+
+
+
+        //     console.log(li)
+
+        // }
+        // console.log(all)
     }
 return (
     <>
     <div className='search__outer'>
-    <Navbar changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin}/>
+    <Navbar changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin} flag={1}/>
         <div className='search__inner'>
             <div className='search__inner__left'>
                 <div className='search__inner__left__top'>
@@ -99,7 +252,7 @@ return (
                                 valueLabelDisplay="auto"
                                 getAriaValueText={valuetext}
                                 min={1}
-                                max={100}
+                                max={50}
                             />
                         </div>
                     </div>

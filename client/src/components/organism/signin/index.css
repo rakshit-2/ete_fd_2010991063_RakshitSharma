@@ -1,27 +1,24 @@
 
-@keyframes filterAuth{
-    from{
-        height:1rem;
-    }
-    to{
-        height:30rem;
-    }
-}
+
 @keyframes filterAuth1{
     from{
-        height:1rem;
+        opacity:0;
     }
     to{
-        height:40rem;
+        opacity: 1;
     }
 }
 .signin-outer{
     width:100%;
-    height:40rem;
+    height:100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content:flex-start;
+    background-image: url('./../../assets/images/home7.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 .signin{
     width:90%;
@@ -32,30 +29,75 @@
     display: flex;
     align-items: center;
     justify-content:space-around;
-    animation-name: filterAuth1;
-    animation-duration: 1s;
 }
 .signin-left{
-    width:40%;
-    height:100%;
+    width:450px;
+    height:fit-content;
     display: flex;
     align-items: center;
     justify-content:center;
     overflow: hidden;
+    background-color: white;
+    border-radius: 10px;
+    animation-name: filterAuth1;
+    animation-duration: 1.5s;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
 }
 .signin-left-inner{
-    width:85%;
+    width:100%;
     height:fit-content;
     border-radius: 10px;
     display: flex;
+    margin: 1rem;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding-left: 10px;
     overflow: hidden;
+    
 }
+
+
+@keyframes fadeDown {
+    from{
+        margin-bottom:10rem;
+    }
+    to{
+        margin-bottom:0rem;
+    }
+}
+@keyframes fadeUp {
+    from{
+        margin-top:10rem;
+    }
+    to{
+        margin-top:0rem;
+    }
+}
+.signin-right-image1{
+    width:350px;
+    height:290px;
+    margin-top: -12rem;
+    margin-right: -12rem;
+    border-radius: 1rem;
+    border:2.5px solid white;
+    animation-name: fadeDown;
+    animation-duration: 1s;
+    position: absolute;
+}
+.signin-right-image2{
+    width:350px;
+    height:290px;
+    margin-bottom: -10rem;
+    margin-left: -12rem;
+    border-radius: 1rem;
+    border:2.5px solid white;
+    animation-name: fadeUp;
+    animation-duration: 1s;
+    position: absolute;
+}
+
 .signin-price{
-    width:90%;
+    width:100%;
     height:1rem;
     display: flex;
     align-items: center;
@@ -65,7 +107,7 @@
     color: #EF4B4D;
 }
 .signin-heading{
-    width:90%;
+    width:100%;
     height:fit-content;
     display: flex;
     align-items: center;
@@ -75,7 +117,7 @@
     color: #2F2E41;
 }
 .signin-login{
-    width:90%;
+    width:100%;
     height:2rem;
     margin-bottom: 0.6rem;
     display: flex;
@@ -86,7 +128,7 @@
     color: #2F2E41;
 }
 .signin-name{
-    width:90%;
+    width:100%;
     height:fit-content;
     display: flex;
     margin-bottom: 0.6rem;
@@ -113,7 +155,7 @@
     color: #2F2E41;
 }
 .name-field{
-    width:90%;
+    width:95%;
     height:2rem;
     border-radius: 10px;
     border:none;
@@ -143,7 +185,7 @@
     color: #2F2E41;
 }
 .email-field{
-    width:95%;
+    width:97%;
     height:2rem;
     border-radius: 10px;
     border:none;
@@ -158,14 +200,14 @@
 
 
 .pass-icon-field{
-    width:95%;
+    width:100%;
     height:fit-content;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 .pass-field{
-    width:85%;
+    width:100%;
     height:2rem;
     border-radius: 10px;
     border:none;
@@ -199,7 +241,7 @@
 
 
 .signin-button-outer{
-    width:90%;
+    width:100%;
     height:fit-content;
     display: flex;
     align-items: center;
@@ -238,6 +280,7 @@
     align-items: center;
     justify-content: center;
     background-size: 800px;
+    position: relative;
 }
 
 

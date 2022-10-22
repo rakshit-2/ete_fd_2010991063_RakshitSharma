@@ -218,7 +218,7 @@ return (
                         valueLabelDisplay="auto"
                         getAriaValueText={valuetext}
                         min={1}
-                                max={100}
+                        max={50}
                         />
                     </div>
                     <div className='home__inner__seaction2__inner__bottom__under__all2' style={{display:filterDisplay.bedroom}}>

@@ -66,8 +66,6 @@ return (
                 <Carousel 
                     responsive={responsive} 
                     draggable
-                    autoPlay
-                    autoPlaySpeed={3000}
                     pauseOnHover
                     infinite
                     showDots={true}

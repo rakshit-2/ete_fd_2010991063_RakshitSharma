@@ -6,6 +6,7 @@
     border-bottom-left-radius: 2rem;
     border-bottom-right-radius: 2rem;
     z-index: 100;
+    color: white;
 }
 .navbar__inner{
     width:100%;
@@ -48,7 +49,7 @@
 
 
 .navbar__inner__right{
-    width:25rem;
+    width:15rem;
     height:100%;
     margin-right: 2rem;
     display: flex;

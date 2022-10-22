@@ -12,13 +12,19 @@ import Signin from './components/organism/signin';
 import Profile from './components/organism/profile';
 import Search from './components/organism/search';
 import Axios from 'axios';
-
+import AOS from 'aos';
+import 'aos/dist/aos.css'
 
 
 import { useState,useEffect } from 'react';
 
 
 const App=(props)=>{
+  AOS.init({
+    offset: 100,
+    duration: 500,
+    easing: 'ease-in-sine',
+  });
 
   const[login,setLogin]=useState(0);
   const[loginTypeCheck,setLoginTypeCheck]=useState({
@@ -29,11 +35,11 @@ const App=(props)=>{
   const[loginEmail,setLoginEmail]=useState("")
 
 
+  console.log(loginEmail)
 
 
 
-
-  const [valueBudget, setValueBudget] = React.useState([1, 100]);
+  const [valueBudget, setValueBudget] = React.useState([1, 50]);
 
   const [checkedAll, setCheckedAll] = React.useState(false);
   const [checked1bhk, setChecked1bhk] = React.useState(false);
@@ -78,6 +84,8 @@ const App=(props)=>{
   {
     if(x==true)
     {
+      setLoginEmail(email);
+      setLogin(1);
       if(check==="dealer")
       {
         setLoginTypeCheck({dealer:1,buyer:0})
@@ -86,8 +94,7 @@ const App=(props)=>{
       {
         setLoginTypeCheck({dealer:0,buyer:1})
       }
-      setLoginEmail(email);
-      setLogin(1);
+      
     }
     else
     {

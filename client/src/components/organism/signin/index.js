@@ -10,8 +10,10 @@ import { useState } from 'react';
 import Axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './../navbar/index';
-import signin_img from "./../../assets/images/signup_img.jpg";
-import login_img from "./../../assets/images/login_img.jpg";
+import signin_img1 from "./../../assets/images/home4.jpg";
+import login_img1 from "./../../assets/images/home27.jpg";
+import signin_img2 from "./../../assets/images/home2.jpg";
+import login_img2 from "./../../assets/images/home12.jpg";
 
 const Signin = (props) => 
 {
@@ -217,9 +219,6 @@ const Signin = (props) =>
             <div className="signin" style={{display:displayLogin.signup}}>
                 <div className="signin-left">
                     <div className="signin-left-inner">
-                        <div className="signin-price">
-                            START FOR FREE
-                        </div>
                         <div className="signin-heading">
                             Create new account
                         </div>
@@ -312,7 +311,8 @@ const Signin = (props) =>
                 </div>
 
                 <div className="signin-right">
-                    <img src={signin_img} style={{width:"100%",height:"100%"}}/>
+                    <img src={signin_img1} className="signin-right-image1"/>
+                    <img src={signin_img2} className="signin-right-image2"/>
                 </div>
             </div>
 
@@ -321,13 +321,11 @@ const Signin = (props) =>
                 
 
                 <div className="signin-right">
-                    <img src={login_img} style={{width:"100%",height:"100%"}}/>
+                    <img src={login_img1} className="signin-right-image1"/>
+                    <img src={login_img2} className="signin-right-image2"/>
                 </div>
                 <div className="signin-left">
                     <div className="signin-left-inner">
-                        <div className="signin-price">
-                            GET THE BEST
-                        </div>
                         <div className="signin-heading">
                             Login To Account
                         </div>
