@@ -5,13 +5,13 @@ const FeaturedCard1=(props)=>{
 return (
     <>
     <div className='featuredcard__outer'>
-        <img src={test} className="featuredcard__inner__img"/>
+        <img src={props.image} className="featuredcard__inner__img"/>
         <div className="card__cover"></div>
         <div className='featuredcard__inner__text'>
-            Resedential plots
+            {props.title}
         </div>
         <div className='featuredcard__inner__text__small'>
-            Resedential plots
+            {props.desc}
         </div>
     </div>
     </>

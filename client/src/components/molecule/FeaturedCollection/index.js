@@ -1,5 +1,5 @@
 import './index.css';
-import HomeData from '../../assets/store/homeData';
+import FeaturedData from '../../assets/store/featuredData';
 import Carousel from "react-multi-carousel";
 import "./../../../../node_modules/react-multi-carousel/lib/styles.css";
 import FeaturedCard1 from '../../atom/featuredCard1';
@@ -36,9 +36,12 @@ return (
                 For your last minute needs
             </div>
             <div className='featured__inner__display'>
-                <FeaturedCard1/>
-                <FeaturedCard1/>
-                <FeaturedCard1/>
+              {FeaturedData.map((ele)=>{
+                  const{id,image,title,desc}=ele;
+                  return(
+                      <FeaturedCard1 id={id} image={image} title={title} desc={desc}/>
+                  )
+              })}  
             </div>
         </div>
     </div>

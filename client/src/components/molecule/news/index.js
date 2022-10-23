@@ -1,5 +1,5 @@
 import './index.css';
-import HomeData from '../../assets/store/homeData';
+import NewsData from '../../assets/store/newsData';
 import Carousel from "react-multi-carousel";
 import "./../../../../node_modules/react-multi-carousel/lib/styles.css";
 import NewsCard1 from '../../atom/newsCard1';
@@ -44,10 +44,10 @@ return (
                     infinite
                     showDots={true}
                     removeArrowOnDeviceType={["tablet", "mobile","desktop"]}>
-                    {HomeData.check_panel_typeof.map((ele)=>{
-                        const{id,name}=ele;
+                    {NewsData.map((ele)=>{
+                        const{id,name,desc,image,title,date}=ele;
                         return(
-                            <NewsCard1/>
+                            <NewsCard1 id={id} name={name} desc={desc} image={image} title={title} date={date}/>
                         )
                     })}  
                 </Carousel>

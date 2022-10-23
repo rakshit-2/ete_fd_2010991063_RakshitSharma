@@ -1,5 +1,5 @@
 .newsCard__outer{
-    width:280px;
+    width:320px;
     height:fit-content;
     margin: auto;
     margin-top: 2rem;
@@ -41,10 +41,12 @@
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     font-size: 14px;
+    text-align: center;
     font-weight: 600;
 }
 .newsCard__inner__text{
     width:96%;
     height:fit-content;
     font-size: 13px;
+    text-align: center;
 }

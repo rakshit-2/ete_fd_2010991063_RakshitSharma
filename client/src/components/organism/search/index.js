@@ -19,6 +19,9 @@ const Search=(props)=>{
     const[displayer,setDisplayer]=useState();
     const[loading,setLoading]=useState(true)
 
+
+
+
     useEffect(() => {
         // window.screenTop(0)
         Axios.get('http://localhost:3001/search/get-data',
@@ -44,6 +47,10 @@ const Search=(props)=>{
     const [semiFurnished, setSemiFurnished] = React.useState(false);
     const [unfurnished, setUnfurnished] = React.useState(false);
 
+
+    const[resale,setResale]=useState(false);
+    const[newSale,setNewSale]=useState(false);
+
     function handleFurnishedStatus(x,check)
     {
         switch(x) {
@@ -61,12 +68,25 @@ const Search=(props)=>{
           }
     }
 
+    function handleSaleStatus(x,check)
+    {
+        switch(x) {
+            case 0:
+                setResale(check);
+              break;
+            case 1:
+                setNewSale(check);
+                break;
+            default:
+              console.log("fuck u")
+          }
+    }
+
 
     const[highDemand,setHighDemand]=React.useState(false);
     const[recommended,setRecommended]=React.useState(false);
-    const[photos,setPhotos]=React.useState(false);
 
-    const [valueArea, setValueArea] = React.useState([1, 4000]);
+    const [valueArea, setValueArea] = React.useState([1, 10000]);
     const handleChangeSliderArea = (event, newValue) => {
         setValueArea(newValue);
     };
@@ -77,159 +97,377 @@ const Search=(props)=>{
 
     function changeFilter()
     {
-        var li=all;
-        for(var i=0;i<li.length;i++)
+        setLoading(true);
+        var li1=[];
+        for(var i=0;i<all.length;i++)
         {
-            var price_int=parseInt(li[i].price.slice(0,4));
-            if(price_int>=props.valueBudget[0] && price_int<=props.valueBudget[1])
+            var checkPrice=parseFloat(all[i].price.slice(0,4));
+            if(checkPrice>=props.valueBudget[0] && checkPrice<=props.valueBudget[1])
             {
-                continue;
-            }
-            else
-            {
-                li[i]=-1
+                li1.push(all[i])
             }
         }
-        for(var i=0;i<li.length;i++)
+        
+
+        var li2=[];
+        if(props.checkArr[0]===true)
         {
-            if(props.checkArr[0]===true && li[i].bhk===1)
+            for(var j=0;j<all.length;j++)
             {
-                continue;
-            }
-            else{
-                li[i]=-1
+                if(all[j].bhk===1)
+                {
+                    li2.push(all[j])
+                }
             }
         }
-        console.log(li)
-        // for(var i=0;i<li1.length;i++)
-        // {
-        //     if(props.constructionArr[1]===true && props.constructionArr[2]===true)
-        //     {
-        //         li2.push(li1[i]);
-        //     }
-        //     else if(props.constructionArr[1]===true && li1[i].construction_status==="Under Construction")
-        //     {
-        //         li2.push(li1[i])
-        //     }
-        //     if(props.constructionArr[2]===true && li1[i].construction_status==="Ready to move")
-        //     {
-        //         li2.push(li1[i])
-        //     }
-        // }
-        console.log(li)
+        if(props.checkArr[1]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].bhk===2)
+                {
+                    li2.push(all[j])
+                }
+            }
+        }
+        if(props.checkArr[2]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].bhk===3)
+                {
+                    li2.push(all[j])
+                }
+            }
+        }
+        if(props.checkArr[3]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].bhk===4)
+                {
+                    li2.push(all[j])
+                }
+            }
+        }
+        if(props.checkArr[4]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].bhk===5)
+                {
+                    li2.push(all[j])
+                }
+            }
+        }
+        if(li2.length===0)
+        {
+            li2=all;
+        }
+        
+        var li3=[];
+        var flag3=0;
+        // add flag for else condition to add all the data if none is checked
+        if(props.constructionArr[0]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].construction_status==="Under Construction")
+                {
+                    li3.push(all[j])
+                }
+            }
+        }
+        if(props.constructionArr[1]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].construction_status==="Ready to move")
+                {
+                    li3.push(all[j])
+                }
+            }
+        }
+        if(li3.length===0)
+        {
+            li3=all;
+        }
 
 
 
 
-        // var li=all;
-        // for(var i=0;i<10;i++)
-        // {
-        //     var flag=0;
-        //     //budget
-        //     console.log("inside filter functio")
-        //     var price_int=parseInt(li[i].price.slice(0,4));
-        //     if(price_int>=props.valueBudget[0] && price_int<=props.valueBudget[1])
-        //     {
-        //         flag=1;
-        //     }
-        //     else
-        //     {
-        //         continue;
-        //     }
-
-        //     if(flag===1)
-        //     {
-        //         //bhk
-        //         console.log(props.checkArr)
-        //         if(props.checkArr[0]===true)
-        //         {
-        //             if(li[i].bhk===1)
-        //             {
-        //                 flag=2
-        //             }
-        //         }
-        //         if(props.checkArr[1]===true)
-        //         {
-        //             if(li[i].bhk===2)
-        //             {
-        //                 flag=2
-        //             }
-        //         }
-        //         if(props.checkArr[2]===true)
-        //         {
-        //             if(li[i].bhk===3)
-        //             {
-        //                 flag=2
-        //             }
-        //         }
-        //         if(props.checkArr[3]===true)
-        //         {
-        //             if(li[i].bhk===4)
-        //             {
-        //                 flag=2
-        //             }
-        //         }
-        //         if(props.checkArr[4]===true)
-        //         {
-        //             if(li[i].bhk===5)
-        //             {
-        //                 flag=2
-        //             }
-        //         }
-        //     }
-        //     else
-        //     {
-        //         continue;
-        //     }
-            
-            
-        //     if(flag===2)
-        //     {
-        //         if(props.constructionArr[1]===true)
-        //         {
-        //             if(all[i].construction_status==="Under Construction")
-        //             {
-        //                 flag=3
-        //             }
-        //         }
-        //         if(props.constructionArr[2]===true)
-        //         {
-        //             if(all[i].construction_status==="Ready to move")
-        //             {
-        //                 flag=3
-        //             }
-        //         }
-        //     }
-        //     else
-        //     {
-        //         continue;
-        //     }
-
-            
+        var li4=[]
+        if(props.typeofArr[0]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].type_of==="Flat")
+                {
+                    li4.push(all[j])
+                }
+            }
+        }
+        if(props.typeofArr[1]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].type_of==="Builder Floor")
+                {
+                    li4.push(all[j])
+                }
+            }
+        }
+        if(props.typeofArr[2]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].type_of==="Independent House")
+                {
+                    li4.push(all[j])
+                }
+            }
+        }
+        if(props.typeofArr[3]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].type_of==="Residential Land")
+                {
+                    li4.push(all[j])
+                }
+            }
+        }
+        if(props.typeofArr[4]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].type_of==="Farm House")
+                {
+                    li4.push(all[j])
+                }
+            }
+        }
+        if(props.typeofArr[5]===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].type_of==="Servised Apartment")
+                {
+                    li4.push(all[j])
+                }
+            }
+        }
+        if(li4.length===0)
+        {
+            li4=all;
+        }
 
 
 
-        //     // checking area for filter
-        //     var area_int=parseInt(all[i].area);
-        //     if(area_int>=valueArea[0] && area_int<=valueArea[1])
-        //     {
-        //         li.add(all[i])
-        //     }
-        //     else
-        //     {
-        //         continue;
-        //     }
-
-        //     // checking verefied
+        console.log(li4)
 
 
 
+        var li5=[]
+        if(verefied===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].verefied===1)
+                {
+                    li5.push(all[j])
+                }
+            }
+        }
+        else
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].verefied===0)
+                {
+                    li5.push(all[j])
+                }
+            }
+        }
 
 
-        //     console.log(li)
+        var li6=[]
+        if(furnished===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].furnished_status ==="furnished" )
+                {
+                    li6.push(all[j])
+                }
+            }
+        }
+        if(unfurnished===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].furnished_status ==="unfurnished" )
+                {
+                    li6.push(all[j])
+                }
+            }
+        }
+        if(semiFurnished===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].furnished_status ==="semi-furnished" )
+                {
+                    li6.push(all[j])
+                }
+            }
+        }
+        if(li6.length===0)
+        {
+            li6=all;
+        }
 
-        // }
-        // console.log(all)
+
+
+
+        var li7=[]
+        if(highDemand===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].high_demand===1)
+                {
+                    li7.push(all[j])
+                }
+            }
+        }
+        else
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].high_demand===0)
+                {
+                    li7.push(all[j])
+                }
+            }
+        }
+
+
+        var li8=[]
+        if(recommended===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].recommended===1)
+                {
+                    li8.push(all[j])
+                }
+            }
+        }
+        else
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].recommended===0)
+                {
+                    li8.push(all[j])
+                }
+            }
+        }
+
+        // console.log(li7,li8)
+
+        var li9=[];
+        for(var i=0;i<all.length;i++)
+        {
+            var checkArea=parseFloat(all[i].area);
+            if(checkArea>=valueArea[0] && checkArea<=valueArea[1])
+            {
+                li9.push(all[i])
+            }
+        }
+        if(li9.length===0)
+        {
+            li9=all;
+        }
+
+        var li10=[]
+        if(resale===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].purchase_status==="Resale" )
+                {
+                    li10.push(all[j])
+                }
+            }
+        }
+        if(newSale===true)
+        {
+            for(var j=0;j<all.length;j++)
+            {
+                if(all[j].purchase_status==="New Booking" )
+                {
+                    li10.push(all[j])
+                }
+            }
+        }
+        if(li10.length===0)
+        {
+            li10=all;
+        }
+
+
+
+        // var check=intersection(li1, li2, li3, li4,li5,li6,li7,li8,li9,li10);
+        // console.log(check)
+        
+        function intersection() {
+            var result = [];
+            var lists;
+        
+            if(arguments.length === 1) {
+            lists = arguments[0];
+            } else {
+            lists = arguments;
+            }
+        
+            for(var i = 0; i < lists.length; i++) {
+            var currentList = lists[i];
+            for(var y = 0; y < currentList.length; y++) {
+                var currentValue = currentList[y];
+                if(result.indexOf(currentValue) === -1) {
+                var existsInAll = true;
+                for(var x = 0; x < lists.length; x++) {
+                    if(lists[x].indexOf(currentValue) === -1) {
+                    existsInAll = false;
+                    break;
+                    }
+                }
+                if(existsInAll) {
+                    result.push(currentValue);
+                }
+                }
+            }
+            }
+            return result;
+        }
+        var check=intersection(li1,li2,li3,li4,li5,li6,li7,li8,li9,li10);
+        console.log("price",li1)
+        console.log("bhk",li2)
+        console.log("construction",li3)
+        console.log("property",li4)
+        console.log("verefied",li5)
+        console.log("furnished",li6)
+
+        console.log("high",li7)
+        console.log("recommended",li8)
+        console.log("area",li9)
+        console.log("purchase",li10)
+
+        console.log(check)
+        setDisplayer(check);
+        setLoading(false);
     }
 return (
     <>
@@ -385,17 +623,11 @@ return (
                                 valueLabelDisplay="auto"
                                 getAriaValueText={valuetext}
                                 min={1}
-                                max={4000}
+                                max={10000}
                             />
                         </div>
                     </div>
 
-                    <div className='filter__each__row'>
-                        <div className='home__inner__seaction2__inner__bottom__under__all__head' style={{width:"50%"}}>
-                            Property's with Photos
-                        </div>
-                        <Switch {...label} onChange={(e)=>{setPhotos(e.target.checked)}}  />
-                    </div>
 
 
                     <div className='filter__each'>
@@ -410,7 +642,7 @@ return (
                                         key={id}
                                         value={name}
                                         control={<Checkbox />}
-                                        onChange={(e)=>{handleFurnishedStatus(id,e.target.checked)}}
+                                        onChange={(e)=>{handleSaleStatus(id,e.target.checked)}}
                                         label={name}
                                         labelPlacement="end"
                                      />

@@ -139,12 +139,9 @@ const App=(props)=>{
   {
       switch(x) {
           case 0:
-              setConstructionCheckAll(check);
-            break;
-          case 1:
               setConstructionCheckUnder(check);
             break;
-          case 2:
+          case 1:
               setConstructionCheckReady(check);
               break;
           default:
@@ -158,24 +155,21 @@ const App=(props)=>{
   {
       switch(x) {
           case 0:
-              setCheckedTypeofAll(check);
-            break;
-          case 1:
               setCheckedTypeofFlat(check);
             break;
-          case 2:
+          case 1:
               setCheckedTypeofIndependentFloor(check);
               break;
-          case 3:
+          case 2:
               setCheckedTypeofIndependentHouse(check);
           break;
-          case 4:
+          case 3:
               setCheckedTypeofResidentialLand(check);
           break;
-          case 5:
+          case 4:
               setCheckedTypeofFarm(check);
               break;
-          case 6:
+          case 5:
               setCheckedTypeofServisedApart(check);
               break;
           default:
@@ -222,8 +216,8 @@ const App=(props)=>{
           val={val}
           valField={valField}
           checkArr={[checked1bhk,checked2bhk,checked3bhk,checked4bhk,checked5bhk]}
-          constructionArr={[constructionCheckAll,constructionCheckUnder,constructionCheckReady]}
-          typeofArr={[checkedTypeofAll,checkedTypeofFlat,checkedTypeofIndependentFloor,checkedTypeofIndependentHouse,checkedTypeofResidentialLand
+          constructionArr={[constructionCheckUnder,constructionCheckReady]}
+          typeofArr={[checkedTypeofFlat,checkedTypeofIndependentFloor,checkedTypeofIndependentHouse,checkedTypeofResidentialLand
           ,checkedTypeofFarm,checkedTypeofServisedApart]}
         />} ></Route>
         <Route path="/" element={
