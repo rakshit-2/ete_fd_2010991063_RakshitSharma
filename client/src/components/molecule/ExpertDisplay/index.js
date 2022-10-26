@@ -6,14 +6,14 @@ import "./../../../../node_modules/react-multi-carousel/lib/styles.css";
 import Axios from 'axios';
 import { useState,useEffect } from 'react';
 import LoadingScreen from '../../atom/loadingScreen';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 const ExpertDisplay=(props)=>{
 
-
+    const navigate = useNavigate();
     const[expertLoading,setExpertLoading]=useState(true);
     const[expertDisplay,setExpertDisplay]=useState([])
   
@@ -52,7 +52,12 @@ return (
     <div className='recomm__outer'>
         <div className='recomm__inner'>
             <div className='recomm__inner__heading'>
-                Housing Experts
+                <div className='recomm__inner__heading__left'>
+                    Housing Experts
+                </div>
+                <div className='recomm__inner__heading__right' onClick={()=>{navigate('/each-page-expert')}}>
+                    View All
+                </div>
             </div>
             <div className='recomm__inner__heading__small'>
             Sellers with complete knowledge about locality and verified listings    

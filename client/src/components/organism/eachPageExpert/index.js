@@ -3,16 +3,16 @@ import Navbar from '../navbar';
 import { useState,useEffect } from 'react';
 import Axios from 'axios';
 import LoadingScreen from '../../atom/loadingScreen';
-import RecommCard1 from '../../atom/recommCard1';
+import ExpertCard1 from '../../atom/expertCard1';
 
-const EachPageRecomm=(props)=>{
+const EachPageExpert=(props)=>{
 
     const[Loading,setLoading]=useState(true);
     const[Display,setDisplay]=useState([])
   
 
     useEffect(() => {
-      Axios.get('http://localhost:3001/home/recommended/get-data',
+      Axios.get('http://localhost:3001/home/profile/get-data',
       {
           name:"check",
       }).then((res)=>{
@@ -28,10 +28,10 @@ return (
             <Navbar errModale={props.errModale} errText={props.errText} changeErrDisplay={props.changeErrDisplay} changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin}/>
             <div className='each__inner'>
                 <div className='each__inner__head'>
-                    Recommended Properties
+                    Housing Experts
                 </div>
                 <div className='each__inner__smallhead'>
-                    Handpicked projects for you
+                Sellers with complete knowledge about locality and verified listings   
                 </div>
                 {
                 Loading ? (
@@ -40,14 +40,14 @@ return (
                     </div>
                     
                 ):(
-                    <div className='each__inner__card' style={{width:"100%",marginBottom:"none",justifyContent:"space-around",overflowY:"scroll",height:"fit-content",display:'flex',flexWrap:"wrap"}}>
+                    <div className='each__inner__card' style={{width:"100%",marginBottom:"none",overflowY:"scroll",justifyContent:"space-around",height:"fit-content",display:'flex',flexWrap:"wrap",paddingTop:"3rem"}}>
                     {Display.map((ele)=>{
-                            const{id,image,title,description,price,area,bhk,type_of,
-                                construction_status,furnished_status,verefied,global_type,purchase_status}=ele;
-                            return(
-                                <RecommCard1 id={id} image={image} title={title} description={description} price={price} bhk={bhk} eachPageFlag={1}/>
-                            )
-                        })}  
+                        const{id,fname,lname,image,description,exp_year,sold_prop}=ele;
+                        var name=fname+" "+lname;
+                        return(
+                            <ExpertCard1 id={id} name={name} image={image} description={description} exp_year={exp_year} sold_prop={sold_prop} flag={1} eachPageFlag={1}/>
+                        )
+                    })}   
                     </div>
                 )
             }
@@ -58,4 +58,4 @@ return (
 );
 }
 
-export default EachPageRecomm;
+export default EachPageExpert;

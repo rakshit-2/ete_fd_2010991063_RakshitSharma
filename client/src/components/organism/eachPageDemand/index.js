@@ -5,14 +5,14 @@ import Axios from 'axios';
 import LoadingScreen from '../../atom/loadingScreen';
 import RecommCard1 from '../../atom/recommCard1';
 
-const EachPageRecomm=(props)=>{
+const EachPageDemand=(props)=>{
 
     const[Loading,setLoading]=useState(true);
     const[Display,setDisplay]=useState([])
   
 
     useEffect(() => {
-      Axios.get('http://localhost:3001/home/recommended/get-data',
+      Axios.get('http://localhost:3001/home/project/get-data',
       {
           name:"check",
       }).then((res)=>{
@@ -28,10 +28,10 @@ return (
             <Navbar errModale={props.errModale} errText={props.errText} changeErrDisplay={props.changeErrDisplay} changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin}/>
             <div className='each__inner'>
                 <div className='each__inner__head'>
-                    Recommended Properties
+                Recommended Projects
                 </div>
                 <div className='each__inner__smallhead'>
-                    Handpicked projects for you
+                The most searched projects
                 </div>
                 {
                 Loading ? (
@@ -40,14 +40,14 @@ return (
                     </div>
                     
                 ):(
-                    <div className='each__inner__card' style={{width:"100%",marginBottom:"none",justifyContent:"space-around",overflowY:"scroll",height:"fit-content",display:'flex',flexWrap:"wrap"}}>
+                    <div className='each__inner__card' style={{width:"100%",marginBottom:"none",overflowY:"scroll",height:"fit-content",display:'flex',justifyContent:"space-around",flexWrap:"wrap",paddingTop:"3rem"}}>
                     {Display.map((ele)=>{
-                            const{id,image,title,description,price,area,bhk,type_of,
-                                construction_status,furnished_status,verefied,global_type,purchase_status}=ele;
-                            return(
-                                <RecommCard1 id={id} image={image} title={title} description={description} price={price} bhk={bhk} eachPageFlag={1}/>
-                            )
-                        })}  
+                        const{id,image,title,description,price,area,bhk,type_of,
+                            construction_status,furnished_status,verefied,global_type,purchase_status}=ele;
+                        return(
+                            <RecommCard1  eachPageFlag={1} flag={1}  id={id} image={image} title={title} description={description} price={price} bhk={bhk}/>
+                        )
+                    })}
                     </div>
                 )
             }
@@ -58,4 +58,4 @@ return (
 );
 }
 
-export default EachPageRecomm;
+export default EachPageDemand;

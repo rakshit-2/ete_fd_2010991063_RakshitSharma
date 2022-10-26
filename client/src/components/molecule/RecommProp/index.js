@@ -54,7 +54,7 @@ return (
                 <div className='recomm__inner__heading__left'>
                     Recommended Properties
                 </div>
-                <div className='recomm__inner__heading__right' onClick={()=>{navigate('/each-page',{state:{api:"http://localhost:3001/home/recommended/get-data"}})}}>
+                <div className='recomm__inner__heading__right' onClick={()=>{navigate('/each-page-recomm')}}>
                     View All
                 </div>
             </div>

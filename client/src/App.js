@@ -12,6 +12,9 @@ import Signin from './components/organism/signin';
 import Profile from './components/organism/profile';
 import Search from './components/organism/search';
 import EachPageRecomm from './components/organism/eachPageRecomm';
+import EachPageExpert from './components/organism/eachPageExpert';
+import EachPageDemand from './components/organism/eachPageDemand';
+
 import Axios from 'axios';
 import AOS from 'aos';
 import 'aos/dist/aos.css'
@@ -222,6 +225,8 @@ const App=(props)=>{
         <Route path="/signin" element={<Signin errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay} changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
         <Route path="/profile" element={<Profile  errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay} loginEmail={loginEmail} changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
         <Route path="/each-page-recomm" element={<EachPageRecomm  errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay} loginEmail={loginEmail} changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
+        <Route path="/each-page-expert" element={<EachPageExpert  errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay} loginEmail={loginEmail} changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
+        <Route path="/each-page-demand" element={<EachPageDemand  errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay} loginEmail={loginEmail} changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
         <Route path="/search" element={
         <Search 
           errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay}

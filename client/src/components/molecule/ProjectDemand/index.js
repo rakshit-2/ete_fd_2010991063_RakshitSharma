@@ -6,7 +6,7 @@ import "./../../../../node_modules/react-multi-carousel/lib/styles.css";
 import Axios from 'axios';
 import { useState,useEffect } from 'react';
 import LoadingScreen from '../../atom/loadingScreen';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -14,7 +14,7 @@ const ProjectDemand=(props)=>{
 
     const[proLoading,setProLoading]=useState(true);
     const[proDisplay,setProDisplay]=useState([])
-  
+    const navigate = useNavigate();
   
   
     useEffect(() => {
@@ -50,7 +50,13 @@ return (
     <div className='recomm__outer'>
         <div className='recomm__inner'>
             <div className='recomm__inner__heading'>
+                <div className='recomm__inner__heading__left'>
                 Recommended Projects
+                </div>
+                <div className='recomm__inner__heading__right' onClick={()=>{navigate('/each-page-demand')}}>
+                    View All
+                </div>
+                
             </div>
             <div className='recomm__inner__heading__small'>
                 The most searched projects

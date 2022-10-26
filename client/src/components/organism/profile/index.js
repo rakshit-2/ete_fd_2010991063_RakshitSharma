@@ -88,11 +88,12 @@ const Profile=(props)=>{
    
     function postProperty()
     {
-        console.log(bhk.slice(0,1))
+        var check = image.split('\h')
+        var imagess='h'+check[check.length-1];
         Axios.post('http://localhost:3001/property/insert-data',
         {
             title:title,
-            image:image,
+            image:imagess,
             descriptionProp:descriptionProp,
             price:price.toString()+" Cr",
             area:parseFloat(area),
@@ -138,7 +139,6 @@ const Profile=(props)=>{
             return;
         }
         
-
         if(all.dealer===1)
         {
             Axios.post('http://localhost:3001/profile/insert-data',
@@ -205,17 +205,10 @@ const Profile=(props)=>{
                 });
             });
         }
-        
-        
-
-
-
-
-
-
     }
 
-
+    
+    console.log(image)
 
 
     return (
@@ -394,7 +387,8 @@ const Profile=(props)=>{
                                             <div className="name-label">
                                                 Image{'\u00A0'}<i style={{color:"#EF4B4D",width:"10px",height:"10px"}} class="far fa-address-book"></i>
                                             </div>
-                                            <input onChange={(e)=>{setImage(e.target.value)}}   type="text" placeholder={"home1.jpg"} className="name-field"  required='required'/>
+                                            <input type="file" id="img" name="img" onChange={(e)=>{setImage(e.target.value)}} accept="image/*"></input>
+                                            {/* <input onChange={(e)=>{setImage(e.target.value)}}   type="text" placeholder={"home1.jpg"} className="name-field"  required='required'/> */}
                                         </div>
                                     </div>
                                     <div className="signin-name" style={{width:"100%",marginLeft:"1rem",marginTop:"1rem"}}>
