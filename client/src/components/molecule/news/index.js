@@ -28,7 +28,10 @@ const News=(props)=>{
       };
 return (
     <>
-    <div className='news__outer'>
+    <p id="newsSection"></p>
+    <br></br>
+    <br></br>
+    <div className='news__outer' >
         <div className='news__inner'>
             <div className='news__inner__heading'>
                 News & Articles

@@ -89,6 +89,7 @@ const Signin = (props) =>
         }
         else
         {
+            props.changeErrDisplay("Signup Failed")
             console.log('fail');
         }
     }
@@ -117,6 +118,7 @@ const Signin = (props) =>
                     }
                     else
                     {
+                        props.changeErrDisplay("Wrong Login Credentials")
                         console.log("login failed");
                     }
                     
@@ -139,6 +141,7 @@ const Signin = (props) =>
                 }
                 else
                 {
+                    props.changeErrDisplay("Wrong Login Credentials")
                     console.log("login failed");
                 }
                 
@@ -147,6 +150,7 @@ const Signin = (props) =>
         }
         else
         {
+            props.changeErrDisplay("Wrong Login Credentials")
             console.log('fail');
         }
     }
@@ -215,7 +219,7 @@ const Signin = (props) =>
 
     return(
         <div className="signin-outer">
-            <Navbar changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin}/>
+            <Navbar errModale={props.errModale} errText={props.errText} changeErrDisplay={props.changeErrDisplay} changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin}/>
             <div className="signin" style={{display:displayLogin.signup}}>
                 <div className="signin-left">
                     <div className="signin-left-inner">

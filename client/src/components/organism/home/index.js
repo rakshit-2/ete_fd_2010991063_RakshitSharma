@@ -1,7 +1,7 @@
 import * as React from 'react';
 import './index.css';
 import Navbar from '../navbar';
-
+import Footer from './../../molecule/footer';
 import HomeData from './../../assets/store/homeData';
 import Autocomplete from '@mui/material/Autocomplete';
 import TextField from '@mui/material/TextField';
@@ -19,7 +19,7 @@ import ProjectDemand from './../../molecule/ProjectDemand';
 import News from './../../molecule/news';
 import ExpertDisplay from '../../molecule/ExpertDisplay';
 import ads1 from './../../assets/images/ads1.png'
-
+import HomeSectionFeedback from './../../molecule/homeSectionFeedback/index';
 
 
 
@@ -158,7 +158,7 @@ return (
     <>
     <div className='home__outer'>
         <div className='home__inner'>
-            <Navbar changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin}/>
+            <Navbar errModale={props.errModale} errText={props.errText} changeErrDisplay={props.changeErrDisplay} changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin}/>
             
             
             <HomeSection1/>
@@ -291,9 +291,11 @@ return (
             <FeaturedCollection/>
             <RecommProp/>
             <ExpertDisplay/>
+            <HomeSectionFeedback flag={0}/>
             <ProjectDemand/>
             <News/>
-            
+            <HomeSectionFeedback flag={1}/>
+            <Footer/>
         </div>
     </div>
     

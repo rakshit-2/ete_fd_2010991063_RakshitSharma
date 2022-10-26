@@ -2,7 +2,7 @@
     width:90%;
     height:fit-content;
     margin-top: 1rem;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
 }
 .recomm__inner{
     width:100%;
@@ -12,8 +12,33 @@
 .recomm__inner__heading{
     width:100%;
     height:fit-content;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.recomm__inner__heading__left{
+    width:50%;
+    height:fit-content;
     font-size: 30px;
     font-weight: 600;
+}
+.recomm__inner__heading__right{
+    width:fit-content;
+    height:fit-content;
+    padding: 8px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border-radius: 2rem;
+    font-weight: 500;
+    color: white;
+    background-color: #EF4B4D;
+    cursor: pointer;
+
+}
+.recomm__inner__heading__right:hover{
+    transform: scale(1.08);
+    transition-duration: 0.5s;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .recomm__inner__heading__small{
     width:100%;

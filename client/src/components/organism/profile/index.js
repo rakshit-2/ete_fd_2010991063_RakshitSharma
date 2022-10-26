@@ -108,7 +108,7 @@ const Profile=(props)=>{
             global_type:"buy",
 
         }).then((res)=>{
-            console.log(res)
+            props.changeErrDisplay("Property Posted Successfully")
         });
     }
 
@@ -117,55 +117,95 @@ const Profile=(props)=>{
     {
         if(income==="")
         {
-            alert("fill Income correctly");
+            props.changeErrDisplay("fill Income correctly")
             return;
         }
         var check=/^[#.0-9a-zA-Z\s,-]+$/;
         if(check.test(address)===false)
         {
-            alert("fill address field");
+            props.changeErrDisplay("fill address field")
             return;
         }
         if(contact.length<10)
         {
-            alert("Add correct Phone Number");
+            props.changeErrDisplay("Add correct Phone Number")
+
             return;
         }
         if(occupation==="")
         {
-            alert("fill occupation correctly");
+            props.changeErrDisplay("fill occupation correctly")
             return;
         }
         
 
-        Axios.post('http://localhost:3001/profile/insert-data',
+        if(all.dealer===1)
         {
-            email:props.loginEmail,
-            income:income,
-            address:address,
-            contact:contact,
-            occ:occupation,
-            description:description,
-            yearOfExp:yearOfExp,
-            soldProp:soldProp
-
-        }).then((res)=>{
-            setLoading(true);
-            Axios.get('http://localhost:3001/profile/get-data',
+            Axios.post('http://localhost:3001/profile/insert-data',
             {
-                params:{
-                    email:props.loginEmail,
-                }
+                
+                email:props.loginEmail,
+                income:income,
+                address:address,
+                contact:contact,
+                occ:occupation,
+                description:description,
+                yearOfExp:yearOfExp,
+                soldProp:soldProp
+    
             }).then((res)=>{
-                setAll(res.data[0]);
-                if(all.updated===1)
+                setLoading(true);
+                Axios.get('http://localhost:3001/profile/get-data',
                 {
+                    params:{
+                        email:props.loginEmail,
+                    }
+                }).then((res)=>{
+                    setAll(res.data[0]);
+                    if(all.updated===1)
+                    {
+                        setAfterSubmit({after:"flex",before:"none"});
+                    }
                     setAfterSubmit({after:"flex",before:"none"});
-                }
-                setAfterSubmit({after:"flex",before:"none"});
-                setLoading(false);
+                    props.changeErrDisplay("Profile Saved Successfully")
+                    setLoading(false);
+                });
             });
-        });
+        }
+        else
+        {
+            Axios.post('http://localhost:3001/profile/insert-data-buyer',
+            {
+                
+                email:props.loginEmail,
+                income:income,
+                address:address,
+                contact:contact,
+                occ:occupation,
+                // description:description,
+                // yearOfExp:yearOfExp,
+                // soldProp:soldProp
+
+            }).then((res)=>{
+                setLoading(true);
+                Axios.get('http://localhost:3001/profile/get-data',
+                {
+                    params:{
+                        email:props.loginEmail,
+                    }
+                }).then((res)=>{
+                    setAll(res.data[0]);
+                    if(all.updated===1)
+                    {
+                        setAfterSubmit({after:"flex",before:"none"});
+                    }
+                    setAfterSubmit({after:"flex",before:"none"});
+                    props.changeErrDisplay("Profile Saved Successfully")
+                    setLoading(false);
+                });
+            });
+        }
+        
         
 
 
@@ -181,7 +221,7 @@ const Profile=(props)=>{
     return (
         <>
         <div className='profile__outer'>
-        <Navbar changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin}/>
+        <Navbar errModale={props.errModale} errText={props.errText} changeErrDisplay={props.changeErrDisplay} changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin}/>
             {
                 loading ? (
                     <div className='loading__outer' style={{width:"100%",height:"100vh",display:"flex",alignItems:"center",justifyContent:"center"}}>
@@ -276,7 +316,9 @@ const Profile=(props)=>{
                                 </div>
                                 <div className='name-field' style={{backgroundColor:"white",borderRadius:"1px",borderBottom:"2px solid #EF4B4D"}}>
                                 {
+                                    
                                 all.buyer===1 ? (
+                                    
                                     <>
                                         Buyer
                                     </>

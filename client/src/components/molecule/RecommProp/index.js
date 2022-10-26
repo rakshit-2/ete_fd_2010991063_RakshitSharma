@@ -1,4 +1,5 @@
 import './index.css';
+import * as React from 'react';
 import RecommCard1 from './../../atom/recommCard1';
 import HomeData from '../../assets/store/homeData';
 import Carousel from "react-multi-carousel";
@@ -6,14 +7,14 @@ import "./../../../../node_modules/react-multi-carousel/lib/styles.css";
 import Axios from 'axios';
 import { useState,useEffect } from 'react';
 import LoadingScreen from '../../atom/loadingScreen';
-
+import { useNavigate } from 'react-router-dom';
 
 
 
 const RecommProp=(props)=>{
     const[recommLoading,setRecommLoading]=useState(true);
     const[recommDisplay,setRecommDisplay]=useState([])
-  
+    const navigate = useNavigate();
   
   
     useEffect(() => {
@@ -50,7 +51,12 @@ return (
     <div className='recomm__outer'>
         <div className='recomm__inner'>
             <div className='recomm__inner__heading'>
-                Recommended Properties
+                <div className='recomm__inner__heading__left'>
+                    Recommended Properties
+                </div>
+                <div className='recomm__inner__heading__right' onClick={()=>{navigate('/each-page',{state:{api:"http://localhost:3001/home/recommended/get-data"}})}}>
+                    View All
+                </div>
             </div>
             <div className='recomm__inner__heading__small'>
                 Handpicked projects for you

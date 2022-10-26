@@ -3,7 +3,7 @@ import logo from './../../assets/images/logo.jpg';
 import navData from './../../assets/store/navData';
 import { useState,useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { HashLink } from 'react-router-hash-link';
 
 const Navbar=(props)=>{
 
@@ -24,6 +24,7 @@ const Navbar=(props)=>{
         {
             document.getElementById("nav").style.backgroundColor="white";
             document.getElementById("nav").style.color="black";
+            document.getElementById("setcolor").style.color="black";
             document.getElementById("nav").style.boxShadow="rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px";
         }
         else
@@ -31,6 +32,7 @@ const Navbar=(props)=>{
             document.getElementById("nav").style.boxShadow="none";
             document.getElementById("nav").style.backgroundColor="rgba(86, 86, 86, 0)";
             document.getElementById("nav").style.color="white";
+            document.getElementById("setcolor").style.color="white";
         }
     }
 
@@ -52,11 +54,7 @@ const Navbar=(props)=>{
 
     function navButtonClicked(x)
     {
-        if(x==="News")
-        {
-            navigate('/news');
-        }
-        else if(x==="Post Property")
+        if(x==="Post Property")
         {
             if(props.login!==1)
             {
@@ -106,15 +104,28 @@ const Navbar=(props)=>{
                 <div className='navbar__inner__right'>
                     {navData.map((ele)=>{
                         const{id,name,link}=ele;
-                        return(
-                            <div key={id} className='navbar__inner__right__each' onClick={()=>{navButtonClicked(name)}}>
-                                {name}
-                            </div>
-                        );
+                        if(name==="News")
+                        {
+                            return (
+                                <HashLink to='/#newsSection' smooth className="navbar__inner__right__each" id="setcolor" style={{textDecoration:"none"}}  >{name}</HashLink>
+                            )
+                        }
+                        else
+                        {
+                            return(
+                                <div key={id} className='navbar__inner__right__each' onClick={()=>{navButtonClicked(name)}}>
+                                    {name}
+                                </div>
+                            );
+                        }
                     })}
                 </div>
             </div>
+            <div className='navbar__outer__err' style={{display:props.errModale}}>
+                {props.errText}
+            </div>
         </div>
+        
         </>
     );
 }

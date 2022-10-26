@@ -1,0 +1,243 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+
+.feedback__section {
+    display: flex;
+    width: 90%;
+    height: fit-content;
+    margin-top: 4rem;
+    margin-bottom: 4rem;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+.feedback__section__suggestion{
+    width:100%;
+    height:25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.suggestion {
+    width: 45%;
+    height:90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.suggestion__heading {
+    margin-bottom: 30px;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.suggestion__label {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: 800;
+    font-size: 17px;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+}
+
+.suggestion__textarea {
+    width: 100%;
+    height:9rem;
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+    background-color: rgba(216, 218, 218, 0.538);
+    border-radius: 20px;
+    resize: none;
+}
+
+
+.suggestion__button {
+    font-family: 'Oswald', sans-serif;
+    background: #EF4B4D;
+    color: #fff;
+    border: 0;
+    padding: 8px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.feedback__section__image{
+    width: 45%;
+    height:90%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.feedback_img{
+    width:100%;
+    height:100%;
+}
+.feedbackIcon__css{
+    width:20px;
+    height:20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.feedback__section__create{
+    width:100%;
+    height:25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.create {
+    width: 600px;
+    text-align: center;
+}
+
+.label__email {
+    text-align: left;
+    margin-bottom: 5px;
+    font-weight: 800;
+    font-size: 17px;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+}
+
+.label__feedback {
+    text-align: left;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-weight: 800;
+    font-size: 17px;
+    display: block;
+    font-family: 'Roboto', sans-serif;
+}
+
+.feedback__heading {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.create input{
+    width: 100%;
+    background-color: rgba(216, 218, 218, 0.538);
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+    resize: none;
+    border-radius: 20px;
+}
+
+.create textarea {
+    width: 100%;
+    height:8rem;
+    background-color: rgba(216, 218, 218, 0.538);
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    display: block;
+    resize: none;
+    border-radius: 20px;
+}
+
+.feedback__button {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-family: 'Oswald', sans-serif;
+    background: #EF4B4D;
+    color: #fff;
+    border: 0;
+    padding: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+
+
+
+@media screen and (max-width:768px)
+{
+    .feedback__section__image{
+        display: none;
+    }
+    .suggestion {
+        width: 80%;
+    }
+    .create {
+        width: 80%;
+        text-align: center;
+    }
+}
+@media screen and (max-width:602px)
+{
+    .suggestion__heading {
+        font-size: 1.5rem;
+        justify-content: center;
+        text-align: center;
+    }
+    .feedback__heading {
+        justify-content: center;
+        font-size: 1.5rem;
+    }
+}
+@media screen and (max-width:483px)
+{
+    .suggestion {
+        width: 90%;
+    }
+    .create {
+        width: 90%;
+    }
+  
+}
+@media screen and (max-width:412px)
+{
+    .suggestion {
+        width: 95%;
+    }
+    .create {
+        width: 95%;
+    }
+}
+
+@media screen and (max-width:379px)
+{
+    .suggestion__heading {
+        font-size: 1.3rem;
+    }
+    .feedback__heading {
+        font-size: 1.3rem;
+    }
+    .create input{
+        font-size: 14px;
+    }
+    .create textarea {
+        font-size: 14px;
+    }
+    .suggestion__textarea {
+        font-size: 14px;
+    }
+    
+}

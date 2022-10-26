@@ -11,6 +11,7 @@ import Home from './components/organism/home';
 import Signin from './components/organism/signin';
 import Profile from './components/organism/profile';
 import Search from './components/organism/search';
+import EachPageRecomm from './components/organism/eachPageRecomm';
 import Axios from 'axios';
 import AOS from 'aos';
 import 'aos/dist/aos.css'
@@ -36,6 +37,11 @@ const App=(props)=>{
 
 
   console.log(loginEmail)
+
+
+  const[errModale,setErrModale]=useState("none");
+  const[errText,setErrText]=useState('');
+
 
 
 
@@ -74,7 +80,17 @@ const App=(props)=>{
     setValField(x)
   }
   
+  function myStopFunction() 
+  {
+    setErrModale("none");
+  }
 
+  function changeErrDisplay(x)
+  {
+    setErrModale("flex");
+    setErrText(x);
+    setTimeout(myStopFunction, 3000);
+  }
   
 
 
@@ -86,6 +102,7 @@ const App=(props)=>{
     {
       setLoginEmail(email);
       setLogin(1);
+      changeErrDisplay("Login Success");
       if(check==="dealer")
       {
         setLoginTypeCheck({dealer:1,buyer:0})
@@ -98,6 +115,7 @@ const App=(props)=>{
     }
     else
     {
+      changeErrDisplay("Login Failed");
       setShowErrorLogin(1);
     }
   }
@@ -201,10 +219,12 @@ const App=(props)=>{
   
     <BrowserRouter>
       <Routes>
-        <Route path="/signin" element={<Signin  changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
-        <Route path="/profile" element={<Profile loginEmail={loginEmail} changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
+        <Route path="/signin" element={<Signin errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay} changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
+        <Route path="/profile" element={<Profile  errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay} loginEmail={loginEmail} changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
+        <Route path="/each-page-recomm" element={<EachPageRecomm  errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay} loginEmail={loginEmail} changeLogin={changeLogin} login={login} showErrorLogin={showErrorLogin}/>} ></Route>
         <Route path="/search" element={
         <Search 
+          errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay}
           changeLogin={changeLogin} 
           login={login} 
           showErrorLogin={showErrorLogin}
@@ -222,6 +242,7 @@ const App=(props)=>{
         />} ></Route>
         <Route path="/" element={
         <Home 
+        errModale={errModale} errText={errText} changeErrDisplay={changeErrDisplay}
           changeLogin={changeLogin} 
           login={login} 
           showErrorLogin={showErrorLogin}

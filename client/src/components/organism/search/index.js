@@ -472,7 +472,7 @@ const Search=(props)=>{
 return (
     <>
     <div className='search__outer'>
-    <Navbar changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin} flag={1}/>
+    <Navbar errModale={props.errModale} errText={props.errText} changeErrDisplay={props.changeErrDisplay} changeLogin={props.changeLogin} login={props.login} showErrorLogin={props.showErrorLogin}/>
         <div className='search__inner'>
             <div className='search__inner__left'>
                 <div className='search__inner__left__top'>

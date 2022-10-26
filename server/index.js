@@ -92,13 +92,29 @@ app.post("/profile/insert-data",(req,res)=>{
     var yearOfExp=req.body.yearOfExp;
     var soldProp=req.body.soldProp;
 
-
+    console.log(email)
     var postAll="UPDATE profile SET income = ?, address = ?, contact=?, occupation=?, updated=? , description=?, exp_year=?, sold_prop=? WHERE email=?;"
     db.query(postAll,[income,address,contact,occ,1,description,yearOfExp,soldProp,email],(err,result)=>{
         res.send(result);
     })
 })
+app.post("/profile/insert-data-buyer",(req,res)=>{
+    var email=req.body.email;
+    var income=req.body.income;
+    var address=req.body.address;
+    var contact=req.body.contact;
+    var occ=req.body.occ;
 
+    // var description=req.body.description;
+    // var yearOfExp=req.body.yearOfExp;
+    // var soldProp=req.body.soldProp;
+
+    console.log(email)
+    var postAll="UPDATE profile SET income = ?, address = ?, contact=?, occupation=?, updated=? WHERE email=?;"
+    db.query(postAll,[income,address,contact,occ,1,email],(err,result)=>{
+        res.send(result);
+    })
+})
 
 app.post("/property/insert-data",(req,res)=>{
     var title=req.body.title;
